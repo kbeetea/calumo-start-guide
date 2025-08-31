@@ -1,5 +1,5 @@
-import { CheckCircle, Circle, Clock, Play } from "lucide-react";
-import { useState } from "react";
+import { CheckCircle, Circle, Clock } from "lucide-react";
+import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 
 interface Step {
@@ -37,31 +37,36 @@ const initialSteps: Step[] = [
 ];
 
 const ProgressSteps = () => {
-  const [currentStepIndex, setCurrentStepIndex] = useState(1);
   const [completedSteps, setCompletedSteps] = useState(new Set(["overview"]));
 
-  const getStepStatus = (index: number) => {
-    if (completedSteps.has(initialSteps[index].id)) return "completed";
-    if (index === currentStepIndex) return "current";
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const sectionId = entry.target.id;
+            if (sectionId && !completedSteps.has(sectionId)) {
+              setCompletedSteps(prev => new Set(prev).add(sectionId));
+            }
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    // Observe all sections
+    const sections = document.querySelectorAll('section[id]');
+    sections.forEach(section => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, [completedSteps]);
+
+  const getStepStatus = (step: Step) => {
+    if (completedSteps.has(step.id)) return "completed";
     return "upcoming";
   };
 
-  const markStepComplete = (stepIndex: number) => {
-    const stepId = initialSteps[stepIndex].id;
-    if (!completedSteps.has(stepId)) {
-      const newCompleted = new Set(completedSteps);
-      newCompleted.add(stepId);
-      setCompletedSteps(newCompleted);
-      
-      // Move to next step if current step is completed
-      if (stepIndex === currentStepIndex && stepIndex < initialSteps.length - 1) {
-        setCurrentStepIndex(stepIndex + 1);
-      }
-    }
-  };
-
   const resetProgress = () => {
-    setCurrentStepIndex(1);
     setCompletedSteps(new Set(["overview"]));
   };
 
@@ -81,35 +86,24 @@ const ProgressSteps = () => {
       
       <div className="space-y-4">
         {initialSteps.map((step, index) => {
-          const status = getStepStatus(index);
+          const status = getStepStatus(step);
           return (
             <div 
               key={step.id} 
-              className={`flex items-center gap-4 p-3 rounded-lg transition-all duration-300 ${
-                status === "current" ? "bg-primary/5 border border-primary/20" : ""
-              } ${status === "upcoming" ? "hover:bg-muted/50 cursor-pointer" : ""}`}
-              onClick={() => status === "upcoming" && index === currentStepIndex && markStepComplete(index)}
+              className="flex items-center gap-4 p-3 rounded-lg transition-all duration-300"
             >
               <div className="flex-shrink-0 relative">
                 {status === "completed" && (
                   <CheckCircle className="w-6 h-6 text-accent animate-scale-in" />
                 )}
-                {status === "current" && (
-                  <div className="relative">
-                    <Clock className="w-6 h-6 text-primary animate-pulse" />
-                    <div className="absolute -inset-1 bg-primary/20 rounded-full animate-ping"></div>
-                  </div>
-                )}
                 {status === "upcoming" && (
-                  <Circle className="w-6 h-6 text-muted-foreground hover:text-primary transition-colors" />
+                  <Circle className="w-6 h-6 text-muted-foreground" />
                 )}
               </div>
               
               <div className="flex-grow">
                 <h4 className={`font-semibold transition-colors ${
-                  status === "current" ? "text-primary" : 
-                  status === "completed" ? "text-accent" : 
-                  "text-muted-foreground"
+                  status === "completed" ? "text-accent" : "text-muted-foreground"
                 }`}>
                   {step.title}
                 </h4>
@@ -117,28 +111,10 @@ const ProgressSteps = () => {
               </div>
               
               <div className="flex items-center gap-2">
-                {status === "current" && index === currentStepIndex && (
-                  <Button
-                    size="sm"
-                    variant="default"
-                    className="h-8 px-3 text-xs"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      markStepComplete(index);
-                    }}
-                  >
-                    <Play className="w-3 h-3 mr-1" />
-                    Complete
-                  </Button>
-                )}
-                
                 <div className={`text-xs px-2 py-1 rounded-full transition-all ${
-                  status === "completed" ? "bg-accent/10 text-accent" :
-                  status === "current" ? "bg-primary/10 text-primary" :
-                  "bg-muted text-muted-foreground"
+                  status === "completed" ? "bg-accent/10 text-accent" : "bg-muted text-muted-foreground"
                 }`}>
-                  {status === "completed" ? "Done" :
-                   status === "current" ? "In Progress" : "Pending"}
+                  {status === "completed" ? "Done" : "Pending"}
                 </div>
               </div>
             </div>

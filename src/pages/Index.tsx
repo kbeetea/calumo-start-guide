@@ -12,54 +12,55 @@ const Index = () => {
       
       <main>
         {/* Getting Started Section */}
-        <section id="getting-started" className="py-16">
+        <section id="overview" className="py-16">
           <div className="container mx-auto px-6">
             <div className="max-w-6xl mx-auto">
-              <div className="grid lg:grid-cols-3 gap-8">
-                <div className="lg:col-span-2">
-                  <h2 className="text-4xl font-bold mb-6 text-foreground">Getting Started</h2>
-                  <div className="prose prose-lg max-w-none">
-                    <p className="text-xl text-muted-foreground mb-6 leading-relaxed">
-                      Welcome to the CALUMO engineering team! This comprehensive guide will walk you through 
-                      everything you need to get started: from gaining access and setting up your system, 
-                      to running CALUMO locally and finding the right learning resources.
-                    </p>
-                    
-                    <div className="bg-primary/5 border border-primary/20 rounded-lg p-6 mb-8">
-                      <h3 className="text-2xl font-bold text-primary mb-4">Before You Start</h3>
-                      <p className="text-muted-foreground mb-4">
-                        To understand how we work and the technology stack we use, please review the following:
-                      </p>
-                      <ul className="space-y-2">
-                        <li className="flex items-center gap-3">
-                          <div className="w-2 h-2 bg-primary rounded-full"></div>
-                          <span className="text-foreground">📖 CALUMO Tech Stack Overview – Get familiar with our tools and frameworks</span>
-                        </li>
-                        <li className="flex items-center gap-3">
-                          <div className="w-2 h-2 bg-primary rounded-full"></div>
-                          <span className="text-foreground">📖 Task Implementation Process – Learn our development workflow</span>
-                        </li>
-                      </ul>
-                    </div>
-
-                    <div className="bg-accent/5 border border-accent/20 rounded-lg p-6">
-                      <h3 className="text-2xl font-bold text-accent mb-4">Support Channels</h3>
-                      <p className="text-muted-foreground mb-4">
-                        CALUMO uses different support channels depending on the type of request. 
-                        Understanding these channels is important because they are the gateway to obtaining 
-                        all necessary accounts, permissions, and system access.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+              <h2 className="text-4xl font-bold mb-6 text-foreground">Getting Started</h2>
+              <div className="prose prose-lg max-w-none">
+                <p className="text-xl text-muted-foreground mb-6 leading-relaxed">
+                  Welcome to the CALUMO engineering team! This comprehensive guide will walk you through 
+                  everything you need to get started: from gaining access and setting up your system, 
+                  to running CALUMO locally and finding the right learning resources.
+                </p>
                 
-                <div className="lg:col-span-1">
-                  <ProgressSteps />
+                <div className="bg-primary/5 border border-primary/20 rounded-lg p-6 mb-8">
+                  <h3 className="text-2xl font-bold text-primary mb-4">Before You Start</h3>
+                  <p className="text-muted-foreground mb-4">
+                    To understand how we work and the technology stack we use, please review the following:
+                  </p>
+                  <ul className="space-y-2">
+                    <li className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-primary rounded-full"></div>
+                      <span className="text-foreground">📖 CALUMO Tech Stack Overview – Get familiar with our tools and frameworks</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-primary rounded-full"></div>
+                      <span className="text-foreground">📖 Task Implementation Process – Learn our development workflow</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="bg-accent/5 border border-accent/20 rounded-lg p-6">
+                  <h3 className="text-2xl font-bold text-accent mb-4">Support Channels</h3>
+                  <p className="text-muted-foreground mb-4">
+                    CALUMO uses different support channels depending on the type of request. 
+                    Understanding these channels is important because they are the gateway to obtaining 
+                    all necessary accounts, permissions, and system access.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </section>
+
+        {/* Progress Tracker */}
+        <div className="sticky top-4 z-50 mx-6 mb-8">
+          <div className="container mx-auto">
+            <div className="max-w-md ml-auto">
+              <ProgressSteps />
+            </div>
+          </div>
+        </div>
 
         <AccessSection />
         <SystemSetupSection />
