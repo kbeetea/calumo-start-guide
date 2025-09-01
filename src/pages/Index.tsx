@@ -1,5 +1,5 @@
 import OnboardingHeader from "@/components/OnboardingHeader";
-import ProgressSteps from "@/components/ProgressSteps";
+import ScrollProgress from "@/components/ScrollProgress";
 import AccessSection from "@/components/AccessSection";
 import SystemSetupSection from "@/components/SystemSetupSection";
 import LocalEnvironmentSection from "@/components/LocalEnvironmentSection";
@@ -53,14 +53,8 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Progress Tracker */}
-        <section className="py-8">
-          <div className="container mx-auto px-6">
-            <div className="max-w-6xl mx-auto">
-              <ProgressSteps />
-            </div>
-          </div>
-        </section>
+        {/* Scroll Progress Indicator */}
+        <ScrollProgress />
 
         <AccessSection />
         <SystemSetupSection />
