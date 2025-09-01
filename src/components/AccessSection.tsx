@@ -1,4 +1,4 @@
-import { Mail, Shield, Github, Globe, Server, Key } from "lucide-react";
+import { Mail, Shield, Github, Globe, Server, Key, Code, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const AccessSection = () => {
@@ -12,7 +12,8 @@ const AccessSection = () => {
         "Confluence: Calumo Engineering/DevOps space",
         "Jira: Calumo Engineering (CE) project", 
         "DWIGHT (via OKTA) access",
-        "Visual Studio Enterprise license"
+        "Visual Studio Enterprise license",
+        "Slack workspace invitation (calumo.slack.com)"
       ]
     },
     {
@@ -37,7 +38,8 @@ const AccessSection = () => {
       requirements: [
         "Enable two-factor authentication (2FA)",
         "Save recovery codes securely",
-        "Share details with team lead for CALUMO GitHub Team access"
+        "Share details with team lead for CALUMO GitHub Team access",
+        "Access to all CALUMO repositories for development"
       ]
     },
     {
@@ -45,9 +47,21 @@ const AccessSection = () => {
       icon: <Key className="w-6 h-6" />,
       description: "Raise ProdSupport ticket for PROD/DEV access",
       requirements: [
-        "Grants PROD/DEV access",
-        "Enables VPN setup",
-        "Required for accessing CALUMO systems"
+        "Grants PROD/DEV access and enables VPN setup",
+        "Required for accessing CALUMO systems from VPN",
+        "Keep temporary password safe and reset on first login",
+        "Required for CloudManagement access"
+      ]
+    },
+    {
+      title: "Azure DevOps Access",
+      icon: <Code className="w-6 h-6" />,
+      description: "Access via invite from Azure DevOps - CALUMO",
+      requirements: [
+        "Visual Studio Enterprise license required",
+        "Access to Cloud Management repositories",
+        "CALUMO Login and Notifications repos",
+        "Calumolabs Organization membership"
       ]
     },
     {
@@ -58,6 +72,26 @@ const AccessSection = () => {
         "PROD: https://cloud.calumo.com/calumo",
         "DEV: https://aus-cloud.calumo.com/dev",
         "Requires existing CALUMO account"
+      ]
+    },
+    {
+      title: "Visual Studio Enterprise",
+      icon: <Server className="w-6 h-6" />,
+      description: "Request via IT Support for full development access",
+      requirements: [
+        "Required for Azure DevOps full access",
+        "License assignment via https://my.visualstudio.com/",
+        "Contact itsupport@insightsoftware.com"
+      ]
+    },
+    {
+      title: "Slack Workspace",
+      icon: <Users className="w-6 h-6" />,
+      description: "Request invitation to CALUMO Slack workspace",
+      requirements: [
+        "Workspace: https://calumo.slack.com",
+        "Invitation reviewed by Paul Cavanagh-Downs",
+        "Request through IT Support channel"
       ]
     }
   ];
