@@ -1,5 +1,5 @@
-import { CheckCircle, Circle, ChevronRight, ChevronLeft } from "lucide-react";
-import { useState } from "react";
+import { CheckCircle, Circle, Clock } from "lucide-react";
+import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 
 interface Step {
@@ -37,33 +37,37 @@ const initialSteps: Step[] = [
 ];
 
 const ProgressSteps = () => {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [completedSteps, setCompletedSteps] = useState(new Set(["overview"]));
 
-  const navigateToSection = (sectionId: string, stepIndex: number) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-      setCurrentStep(stepIndex);
-    }
-  };
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const sectionId = entry.target.id;
+            if (sectionId && !completedSteps.has(sectionId)) {
+              setCompletedSteps(prev => new Set(prev).add(sectionId));
+            }
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
 
-  const goToNextStep = () => {
-    if (currentStep < initialSteps.length - 1) {
-      const nextStep = currentStep + 1;
-      navigateToSection(initialSteps[nextStep].id, nextStep);
-    }
-  };
+    // Observe all sections
+    const sections = document.querySelectorAll('section[id]');
+    sections.forEach(section => observer.observe(section));
 
-  const goToPrevStep = () => {
-    if (currentStep > 0) {
-      const prevStep = currentStep - 1;
-      navigateToSection(initialSteps[prevStep].id, prevStep);
-    }
+    return () => observer.disconnect();
+  }, [completedSteps]);
+
+  const getStepStatus = (step: Step) => {
+    if (completedSteps.has(step.id)) return "completed";
+    return "upcoming";
   };
 
   const resetProgress = () => {
-    setCurrentStep(0);
-    navigateToSection("overview", 0);
+    setCompletedSteps(new Set(["overview"]));
   };
 
   return (
@@ -82,28 +86,24 @@ const ProgressSteps = () => {
       
       <div className="space-y-4">
         {initialSteps.map((step, index) => {
-          const isCompleted = index <= currentStep;
-          const isCurrent = index === currentStep;
+          const status = getStepStatus(step);
           return (
             <div 
               key={step.id} 
-              className={`flex items-center gap-4 p-3 rounded-lg transition-all duration-300 cursor-pointer hover:bg-accent/5 ${
-                isCurrent ? "bg-primary/5 border border-primary/20" : ""
-              }`}
-              onClick={() => navigateToSection(step.id, index)}
+              className="flex items-center gap-4 p-3 rounded-lg transition-all duration-300"
             >
               <div className="flex-shrink-0 relative">
-                {isCompleted && (
+                {status === "completed" && (
                   <CheckCircle className="w-6 h-6 text-accent animate-scale-in" />
                 )}
-                {!isCompleted && (
+                {status === "upcoming" && (
                   <Circle className="w-6 h-6 text-muted-foreground" />
                 )}
               </div>
               
               <div className="flex-grow">
                 <h4 className={`font-semibold transition-colors ${
-                  isCompleted ? "text-accent" : isCurrent ? "text-primary" : "text-muted-foreground"
+                  status === "completed" ? "text-accent" : "text-muted-foreground"
                 }`}>
                   {step.title}
                 </h4>
@@ -112,9 +112,9 @@ const ProgressSteps = () => {
               
               <div className="flex items-center gap-2">
                 <div className={`text-xs px-2 py-1 rounded-full transition-all ${
-                  isCompleted ? "bg-accent/10 text-accent" : isCurrent ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"
+                  status === "completed" ? "bg-accent/10 text-accent" : "bg-muted text-muted-foreground"
                 }`}>
-                  {isCompleted ? "Done" : isCurrent ? "Current" : "Pending"}
+                  {status === "completed" ? "Done" : "Pending"}
                 </div>
               </div>
             </div>
@@ -122,40 +122,15 @@ const ProgressSteps = () => {
         })}
       </div>
       
-      {/* Navigation Controls */}
       <div className="mt-6 pt-4 border-t border-border/30">
-        <div className="flex items-center justify-between mb-4">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={goToPrevStep}
-            disabled={currentStep === 0}
-            className="flex items-center gap-2"
-          >
-            <ChevronLeft className="w-4 h-4" />
-            Previous
-          </Button>
-          
-          <Button
-            variant="default"
-            size="sm"
-            onClick={goToNextStep}
-            disabled={currentStep === initialSteps.length - 1}
-            className="flex items-center gap-2"
-          >
-            Next
-            <ChevronRight className="w-4 h-4" />
-          </Button>
-        </div>
-        
         <div className="flex items-center justify-between text-sm text-muted-foreground">
-          <span>{currentStep + 1} of {initialSteps.length} steps</span>
-          <span>{Math.round(((currentStep + 1) / initialSteps.length) * 100)}% complete</span>
+          <span>{completedSteps.size} of {initialSteps.length} steps completed</span>
+          <span>{Math.round((completedSteps.size / initialSteps.length) * 100)}% complete</span>
         </div>
         <div className="mt-2 w-full bg-muted rounded-full h-2">
           <div 
             className="bg-gradient-primary h-2 rounded-full transition-all duration-500 ease-out"
-            style={{ width: `${((currentStep + 1) / initialSteps.length) * 100}%` }}
+            style={{ width: `${(completedSteps.size / initialSteps.length) * 100}%` }}
           ></div>
         </div>
       </div>
