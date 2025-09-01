@@ -54,13 +54,13 @@ const Index = () => {
         </section>
 
         {/* Progress Tracker */}
-        <div className="sticky top-4 z-50 mx-6 mb-8">
-          <div className="container mx-auto">
-            <div className="max-w-md ml-auto">
+        <section className="py-8">
+          <div className="container mx-auto px-6">
+            <div className="max-w-6xl mx-auto">
               <ProgressSteps />
             </div>
           </div>
-        </div>
+        </section>
 
         <AccessSection />
         <SystemSetupSection />
