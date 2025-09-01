@@ -31,11 +31,15 @@ const Index = () => {
                   <ul className="space-y-2">
                     <li className="flex items-center gap-3">
                       <div className="w-2 h-2 bg-primary rounded-full"></div>
-                      <span className="text-foreground">📖 CALUMO Tech Stack Overview – Get familiar with our tools and frameworks</span>
+                      <a href="https://insightsoftware.atlassian.net/wiki/spaces/CE/pages/15049719892/CALUMO+-+Engineering" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors">📖 CALUMO Tech Stack Overview – Get familiar with our tools and frameworks</a>
                     </li>
                     <li className="flex items-center gap-3">
                       <div className="w-2 h-2 bg-primary rounded-full"></div>
-                      <span className="text-foreground">📖 Task Implementation Process – Learn our development workflow</span>
+                      <a href="https://insightsoftware.atlassian.net/wiki/spaces/CE/pages/16750149678/Task+implementation+process" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors">📖 Task Implementation Process – Learn our development workflow</a>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-primary rounded-full"></div>
+                      <a href="https://insightsoftware.atlassian.net/wiki/spaces/CE/pages/15049719871/Developer+Machine+Setup" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors">📖 Developer Machine Setup – Configure your development environment</a>
                     </li>
                   </ul>
                 </div>
