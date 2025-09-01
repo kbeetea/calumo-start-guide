@@ -11,13 +11,19 @@ const QuickLinksSection = () => {
         {
           title: "CALUMO Tech Stack Overview",
           description: "Understand the tools and frameworks",
-          url: "#",
+          url: "https://insightsoftware.atlassian.net/wiki/spaces/CE/pages/15049719892/CALUMO+-+Engineering",
           icon: <Book className="w-4 h-4" />
         },
         {
           title: "Task Implementation Process",
-          description: "Learn the development workflow",
-          url: "#",
+          description: "Learn the development work",
+          url: "https://insightsoftware.atlassian.net/wiki/spaces/CE/pages/16750149678/Task+implementation+process?utm_source=chatgpt.com",
+          icon: <Terminal className="w-4 h-4" />
+        },
+        {
+          title: "Developer Machine Setup",
+          description: "Initial setup for your development environment",
+          url: "https://insightsoftware.atlassian.net/wiki/spaces/CE/pages/15049719871/Developer+Machine+Setup",
           icon: <Terminal className="w-4 h-4" />
         }
       ]
@@ -36,13 +42,13 @@ const QuickLinksSection = () => {
         {
           title: "VPN Setup Guide",
           description: "Configure CALUMO VPN access",
-          url: "#",
+          url: "https://insightsoftware.atlassian.net/wiki/spaces/CE/pages/15350268088?utm_source=chatgpt.com",
           icon: <ExternalLink className="w-4 h-4" />
         },
         {
           title: "Local Setup Troubleshooting",
           description: "Fix common setup issues",
-          url: "#",
+          url: "https://insightsoftware.atlassian.net/wiki/spaces/CE/pages/16457924647",
           icon: <Bug className="w-4 h-4" />
         }
       ]
@@ -53,22 +59,16 @@ const QuickLinksSection = () => {
       color: "calumo-green",
       links: [
         {
-          title: "Knowledge Transfer Videos",
-          description: "Watch onboarding sessions",
-          url: "#",
+          title: "Knowledge Transfer",
+          description: "Watch onboarding sessions and knowledge transfer content",
+          url: "https://insightsoftware.atlassian.net/wiki/spaces/CE/pages/15565619333",
           icon: <Video className="w-4 h-4" />
         },
         {
           title: "CALUMO Dev Wiki",
           description: "Browse development documentation",
-          url: "#",
+          url: "https://insightsoftware.atlassian.net/wiki/spaces/CE/overview?utm_source=chatgpt.com",
           icon: <Book className="w-4 h-4" />
-        },
-        {
-          title: "CTO Jira Board",
-          description: "Track CALUMO requests",
-          url: "#",
-          icon: <ExternalLink className="w-4 h-4" />
         }
       ]
     }

@@ -171,7 +171,7 @@ const LocalEnvironmentSection = () => {
                 If you encounter errors during setup, refer to the comprehensive troubleshooting guide:
               </p>
               <Button variant="outline" size="sm" asChild>
-                <a href="#" target="_blank" rel="noopener noreferrer">
+                <a href="https://insightsoftware.atlassian.net/wiki/spaces/CE/pages/16457924647" target="_blank" rel="noopener noreferrer">
                   View Troubleshooting Guide
                 </a>
               </Button>
