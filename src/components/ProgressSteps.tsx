@@ -71,7 +71,7 @@ const ProgressSteps = () => {
   };
 
   return (
-    <div className="bg-card shadow-card rounded-xl p-8 border border-border/50">
+    <div className="bg-card/90 backdrop-blur-sm shadow-soft rounded-xl p-6 border border-border/30">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-2xl font-bold text-foreground">Onboarding Progress</h3>
         <Button 
