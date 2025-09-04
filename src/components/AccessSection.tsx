@@ -216,47 +216,54 @@ const AccessSection = () => {
           <div className="space-y-6">
             <h3 className="text-3xl font-bold text-center text-foreground mb-8">Step-by-Step Access Guide</h3>
             
-            {accessSteps.map((step, index) => (
-              <div key={index} className="bg-card border border-border/50 rounded-xl p-6 shadow-soft">
-                <div className="flex items-start gap-4">
-                  {/* Step Number */}
-                  <div className="flex-shrink-0 w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-lg">
-                    {step.step}
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2 bg-accent/10 rounded-lg text-accent">
-                        {step.icon}
+            <div className="grid gap-6">
+              {accessSteps.map((step, index) => (
+                <div key={index} className="bg-card border border-border/50 rounded-xl p-8 shadow-soft">
+                  <div className="flex items-start gap-6">
+                    {/* Step Number */}
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-xl">
+                        {step.step}
                       </div>
-                      <h4 className="text-xl font-bold text-foreground">{step.title}</h4>
-                      <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getTypeColor(step.type)}`}>
-                        {step.type}
-                      </span>
                     </div>
                     
-                    <p className="text-muted-foreground mb-3">{step.description}</p>
-                    
-                    <div className="bg-muted/50 rounded-lg p-3 mb-3">
-                      <p className="text-sm font-medium text-foreground">Action Required:</p>
-                      <p className="text-sm text-muted-foreground">{step.action}</p>
+                    {/* Content */}
+                    <div className="flex-grow">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="p-3 bg-primary/10 rounded-lg text-primary">
+                          {step.icon}
+                        </div>
+                        <h4 className="text-2xl font-bold text-foreground">{step.title}</h4>
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getTypeColor(step.type)}`}>
+                          {step.type}
+                        </span>
+                      </div>
+                      
+                      <p className="text-muted-foreground mb-4">{step.description}</p>
+                      
+                      <div className="bg-muted/50 rounded-lg p-4 mb-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Zap className="w-4 h-4 text-primary" />
+                          <span className="text-sm font-semibold text-foreground">Action Required:</span>
+                        </div>
+                        <p className="text-sm text-primary font-medium">{step.action}</p>
+                      </div>
+                      
+                      {step.details && (
+                        <div className="space-y-2">
+                          {step.details.map((detail, i) => (
+                            <div key={i} className="flex items-start gap-2">
+                              <div className="w-1.5 h-1.5 bg-accent rounded-full mt-2 flex-shrink-0"></div>
+                              <p className="text-sm text-muted-foreground">{detail}</p>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                    
-                    {step.details && (
-                      <ul className="space-y-2">
-                        {step.details.map((detail, i) => (
-                          <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
-                            <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                            <span>{detail}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
