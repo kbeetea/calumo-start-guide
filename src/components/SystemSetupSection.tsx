@@ -65,28 +65,29 @@ const SystemSetupSection = () => {
               Required Software & Installation
             </h3>
             
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid gap-6">
               {requiredSoftware.map((software, index) => (
-                <div key={index} className="bg-card border border-border/50 rounded-lg p-4 shadow-soft">
-                  <div className="flex flex-col gap-3">
-                    <div>
-                      <h4 className="text-lg font-bold text-foreground mb-1">{software.name}</h4>
-                      <p className="text-sm text-muted-foreground mb-3">{software.purpose}</p>
+                <div key={index} className="bg-card border border-border/50 rounded-xl p-6 shadow-soft">
+                  <div className="flex flex-col md:flex-row md:items-center gap-4">
+                    <div className="flex-grow">
+                      <h4 className="text-xl font-bold text-foreground mb-2">{software.name}</h4>
+                      <p className="text-muted-foreground mb-3">{software.purpose}</p>
+                      {software.verifyCommand && (
+                        <div className="bg-muted/50 rounded-lg p-3">
+                          <p className="text-sm text-muted-foreground mb-1">Verify installation:</p>
+                          <code className="text-sm font-mono text-primary">{software.verifyCommand}</code>
+                        </div>
+                      )}
                     </div>
                     
-                    {software.verifyCommand && (
-                      <div className="bg-muted/50 rounded-lg p-2">
-                        <p className="text-xs text-muted-foreground mb-1">Verify:</p>
-                        <code className="text-xs font-mono text-primary">{software.verifyCommand}</code>
-                      </div>
-                    )}
-                    
-                    <Button variant="default" size="sm" asChild className="w-full">
-                      <a href={software.downloadUrl} target="_blank" rel="noopener noreferrer">
-                        <Download className="w-3 h-3 mr-2" />
-                        Download
-                      </a>
-                    </Button>
+                    <div className="flex-shrink-0">
+                      <Button variant="default" asChild>
+                        <a href={software.downloadUrl} target="_blank" rel="noopener noreferrer">
+                          <Download className="w-4 h-4 mr-2" />
+                          Download
+                        </a>
+                      </Button>
+                    </div>
                   </div>
                 </div>
               ))}
