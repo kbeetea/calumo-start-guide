@@ -4,38 +4,85 @@ import { Button } from "@/components/ui/button";
 const LocalEnvironmentSection = () => {
   const setupSteps = [
     {
+      title: "Install Chocolatey",
+      icon: <Terminal className="w-6 h-6" />,
+      description: "Chocolatey will be used as the package manager for required dependencies",
+      commands: [
+        "Set-ExecutionPolicy Bypass -Scope Process -Force; `",
+        "[System.Net.ServicePointManager]::SecurityProtocol = `",
+        "[System.Net.ServicePointManager]::SecurityProtocol -bor 3072; `",
+        "iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
+      ],
+      note: "Open PowerShell as Administrator and run the above commands"
+    },
+    {
+      title: "Install Required Packages",
+      icon: <Terminal className="w-6 h-6" />,
+      description: "Install Node.js, Git, and Yarn using Chocolatey",
+      commands: [
+        "choco install nvm",
+        "nvm install 16.18.0   # Any Node version >= 16 is fine",
+        "choco install git",
+        "choco install git-credential-manager-for-windows",
+        "choco install yarn"
+      ],
+      note: "Run from an Admin PowerShell terminal"
+    },
+    {
       title: "Clone Repository",
       icon: <GitBranch className="w-6 h-6" />,
       description: "Get the CALUMO codebase from GitHub",
       commands: [
-        "git clone https://github.com/isw-Calumo/CALUMO"
+        "git clone https://github.com/isw-Calumo/CALUMO.git"
       ],
-      note: "Preferred method - use GitHub over other repositories"
+      note: "Clone the repository to your local machine"
     },
     {
-      title: "Database & Config Setup",
+      title: "Install Ruby",
       icon: <Database className="w-6 h-6" />,
-      description: "Initialize databases and configuration",
+      description: "Download and install Ruby 2.5.8-2 (32-bit)",
       commands: [
-        "rake ready"
+        "gem install bundler",
+        "bundle install"
       ],
-      note: "This sets up databases and configuration files"
+      note: "Ruby 2.3.3 was previously used, but HTTPS certificates fail when downloading Gems. Navigate to project root directory after installation."
     },
     {
-      title: "VPN Configuration",
+      title: "Install Visual Studio",
       icon: <Globe className="w-6 h-6" />,
-      description: "Set up CALUMO VPN access",
+      description: "Install Visual Studio Professional 2022 with required workloads",
       commands: [],
-      note: "Follow the VPN Setup Guide for installation steps",
-      linkText: "VPN Setup Guide",
-      linkUrl: "#"
+      note: "Go to https://my.visualstudio.com and verify your Visual Studio Professional 2022 subscription. Select workloads: ASP.NET and web development, Azure development, Node.js development, .NET desktop development, Data storage and processing, .NET cross-platform development",
+      linkText: "Visual Studio Downloads",
+      linkUrl: "https://my.visualstudio.com"
     },
     {
-      title: "IIS Bindings",
-      icon: <Globe className="w-6 h-6" />,
-      description: "Configure IIS for local CALUMO instance",
+      title: "Install Certificate",
+      icon: <CheckCircle2 className="w-6 h-6" />,
+      description: "Install the insightsoftware Code Signing Certificate",
       commands: [],
-      note: "See troubleshooting guide for SSL/binding issues"
+      note: "Navigate to .\\certificates\\ and double-click insightsoftware Code Signing Certificate.pfx. Install for Current User. Password: Brisbane04."
+    },
+    {
+      title: "Configure Machine Settings",
+      icon: <Database className="w-6 h-6" />,
+      description: "Create machine-specific settings file",
+      commands: [],
+      note: "In Visual Studio, open CALUMO\\build\\Rake\\settings\\, copy settings.CSSZFX3.rb contents, create settings.YOURMACHINENAME.rb (find machine name in Control Panel → System), replace CSSZFX3 with your machine name, and commit to Git."
+    },
+    {
+      title: "Create Calumo User",
+      icon: <Database className="w-6 h-6" />,
+      description: "Add your user details to the system",
+      commands: [],
+      note: "Open CALUMO\\Infrastructure\\CompiledTasks\\AddCalumoData\\AddCalumoData.cs, locate SaveUsers() method, and add your own user details."
+    },
+    {
+      title: "Commit Changes & Create PR",
+      icon: <GitBranch className="w-6 h-6" />,
+      description: "Commit machine settings and user creation changes",
+      commands: [],
+      note: "Commit the changes made for machine settings and user creation. Push to your branch and create a Pull Request following the standard process."
     }
   ];
 
