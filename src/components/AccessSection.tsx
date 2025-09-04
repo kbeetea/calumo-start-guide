@@ -213,48 +213,50 @@ const AccessSection = () => {
           </div>
 
           {/* Step-by-Step Access Guide */}
-          <div>
+          <div className="space-y-6">
             <h3 className="text-3xl font-bold text-center text-foreground mb-8">Step-by-Step Access Guide</h3>
             
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {accessSteps.map((step, index) => (
-                <div key={index} className="bg-card border border-border/50 rounded-lg p-4 shadow-soft">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="flex-shrink-0 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-sm">
-                      {step.step}
+            {accessSteps.map((step, index) => (
+              <div key={index} className="bg-card border border-border/50 rounded-xl p-6 shadow-soft">
+                <div className="flex items-start gap-4">
+                  {/* Step Number */}
+                  <div className="flex-shrink-0 w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-lg">
+                    {step.step}
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2 bg-accent/10 rounded-lg text-accent">
+                        {step.icon}
+                      </div>
+                      <h4 className="text-xl font-bold text-foreground">{step.title}</h4>
+                      <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getTypeColor(step.type)}`}>
+                        {step.type}
+                      </span>
                     </div>
-                    <span className={`px-2 py-1 rounded text-xs font-medium border ${getTypeColor(step.type)}`}>
-                      {step.type}
-                    </span>
-                  </div>
-                  
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="p-1 bg-accent/10 rounded text-accent">
-                      {step.icon}
+                    
+                    <p className="text-muted-foreground mb-3">{step.description}</p>
+                    
+                    <div className="bg-muted/50 rounded-lg p-3 mb-3">
+                      <p className="text-sm font-medium text-foreground">Action Required:</p>
+                      <p className="text-sm text-muted-foreground">{step.action}</p>
                     </div>
-                    <h4 className="text-lg font-bold text-foreground">{step.title}</h4>
+                    
+                    {step.details && (
+                      <ul className="space-y-2">
+                        {step.details.map((detail, i) => (
+                          <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
+                            <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                            <span>{detail}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
-                  
-                  <p className="text-sm text-muted-foreground mb-3">{step.description}</p>
-                  
-                  <div className="bg-muted/50 rounded-lg p-3 mb-3">
-                    <p className="text-xs font-medium text-foreground mb-1">Action:</p>
-                    <p className="text-xs text-muted-foreground">{step.action}</p>
-                  </div>
-                  
-                  {step.details && (
-                    <ul className="space-y-1">
-                      {step.details.map((detail, i) => (
-                        <li key={i} className="text-xs text-muted-foreground flex items-start gap-2">
-                          <div className="w-1 h-1 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                          <span>{detail}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
