@@ -38,12 +38,18 @@ const SystemSetupSection = () => {
   const additionalRequirements = [
     "VSTS / Azure DevOps account",
     "IIS for hosting local CALUMO website",
-    "Docker for running containers",
-    "WSL2 for Linux-based Docker containers",
-    "Windows Containers",
-    "Office 365 for testing Excel/Word/PowerPoint add-ins",
+    "Office (should already be installed, but if not: Install from Office 365 subscription/account, or use .\\scripts\\install-officevia365.ps1; earlier versions 2013/2010 can be installed manually)",
     "SQL Server 2022 for local databases",
-    "Ruby 2.5.8 (32-bit) for build scripts"
+    "Ruby 2.5.8 (32-bit) for build scripts",
+    "VS Code (choco install vscode) - for editing TypeScript (start by opening directory src/calumo.web.site)",
+    "Optional: choco install git-fork (or any git GUI)",
+    "Optional: choco install resharper-platform (Visual Studio extension)",
+    "Optional: choco install googlechrome (Chrome Browser - default dev browser)",
+    "Optional: choco install firefox (for testing on FireFox)",
+    "Optional: choco install rapidee (for managing your system settings like PATH)",
+    "Optional: choco install sysinternals (process utilities)",
+    "Optional: choco install paint.net (for editing icons)",
+    "Optional: choco install 7zip (for zip management)"
   ];
 
   return (
@@ -118,6 +124,7 @@ const SystemSetupSection = () => {
             </div>
           </div>
         </div>
+
       </div>
     </section>
   );
