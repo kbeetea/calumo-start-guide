@@ -4,32 +4,64 @@ import { Button } from "@/components/ui/button";
 const SystemSetupSection = () => {
   const coreTools = [
     {
-      name: "Git",
-      purpose: "Version control for committing files",
-      downloadUrl: "https://git-scm.com/download/win",
-      verifyCommand: "git --version",
-      setup: "Use Chocolatey: choco install git && choco install git-credential-manager-for-windows"
+      name: "GIT",
+      purpose: "For committing files",
+      icon: "Code"
     },
     {
       name: "Visual Studio Professional 2022",
-      purpose: "Writing C# server/client code",
-      downloadUrl: "https://visualstudio.microsoft.com/vs/professional/",
-      verifyCommand: null,
-      setup: "Login with @insightsoftware.com email. Run as Administrator (required for IIS projects)."
+      purpose: "Mainly for writing C# server/client code",
+      icon: "Code"
     },
     {
-      name: "Node.js (>= v16.0.0)",
-      purpose: "TypeScript/WebPack build tools",
-      downloadUrl: "https://nodejs.org/en",
-      verifyCommand: "node --version",
-      setup: "Use Chocolatey: choco install nvm, then nvm install 16.18.0"
+      name: "VSTS Account",
+      purpose: "For managing issues and pull requests (login with work account)",
+      icon: "Settings"
     },
     {
-      name: "Ruby 2.5.8 (32-bit)",
-      purpose: "Build scripts execution",
-      downloadUrl: "https://rubyinstaller.org/downloads/archives/",
-      verifyCommand: "ruby --version",
-      setup: "Install specific version 2.5.8-2 32-bit. Run: gem install bundler && bundle install"
+      name: "IIS",
+      purpose: "For running your own CALUMO website",
+      icon: "Globe"
+    },
+    {
+      name: "Docker",
+      purpose: "For running related Docker containers (Linux/Windows)",
+      icon: "Settings"
+    },
+    {
+      name: "WSL2",
+      purpose: "For running Docker Linux based containers",
+      icon: "Terminal"
+    },
+    {
+      name: "Windows Containers",
+      purpose: "For running Docker Windows based containers",
+      icon: "Settings"
+    },
+    {
+      name: "Office 365",
+      purpose: "For running Excel/Word/PowerPoint with CALUMO addins for testing",
+      icon: "Settings"
+    },
+    {
+      name: "SQL SERVER 2022",
+      purpose: "For running your own local database for CALUMO website",
+      icon: "Database"
+    },
+    {
+      name: "Ruby 2.5.8 32-bit",
+      purpose: "To run build scripts",
+      icon: "Code"
+    },
+    {
+      name: "NodeJS >= v16.0.0",
+      purpose: "For TypeScript/WebPack",
+      icon: "Code"
+    },
+    {
+      name: "VS Code and JetBrains editor",
+      purpose: "eg WebStorm or RubyMine etc",
+      icon: "Code"
     }
   ];
 
@@ -106,11 +138,6 @@ const SystemSetupSection = () => {
     }
   ];
 
-  const chocolateySetup = {
-    name: "Chocolatey Package Manager",
-    command: `Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))`,
-    packages: ["nvm", "git", "git-credential-manager-for-windows", "yarn", "vscode", "microsoft-build-tools"]
-  };
 
   return (
     <section id="setup" className="py-16">
@@ -124,27 +151,6 @@ const SystemSetupSection = () => {
             </p>
           </div>
 
-          {/* Chocolatey Setup */}
-          <div className="mb-12">
-            <h3 className="text-2xl font-bold mb-6 text-foreground flex items-center gap-3">
-              <Terminal className="w-8 h-8 text-primary" />
-              Chocolatey Package Manager Setup
-            </h3>
-            <div className="bg-card border border-border/50 rounded-xl p-6 shadow-soft">
-              <h4 className="text-lg font-bold text-foreground mb-3">{chocolateySetup.name}</h4>
-              <p className="text-muted-foreground mb-4">Run this command in an Admin PowerShell terminal:</p>
-              <div className="bg-muted/50 rounded-lg p-3 mb-4">
-                <code className="text-xs font-mono text-primary break-all">{chocolateySetup.command}</code>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                {chocolateySetup.packages.map((pkg, index) => (
-                  <span key={index} className="text-sm bg-accent/10 text-accent-foreground px-2 py-1 rounded">
-                    choco install {pkg}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
 
           {/* Core Tools */}
           <div className="mb-12">
@@ -152,25 +158,11 @@ const SystemSetupSection = () => {
               <Code className="w-8 h-8 text-primary" />
               Core Development Tools
             </h3>
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-3">
               {coreTools.map((tool, index) => (
-                <div key={index} className="bg-card border border-border/50 rounded-lg p-4 shadow-soft">
-                  <h4 className="font-bold text-foreground mb-2">{tool.name}</h4>
-                  <p className="text-sm text-muted-foreground mb-3">{tool.purpose}</p>
-                  {tool.verifyCommand && (
-                    <div className="bg-muted/50 rounded p-2 mb-3">
-                      <code className="text-xs font-mono text-primary">{tool.verifyCommand}</code>
-                    </div>
-                  )}
-                  {tool.setup && (
-                    <p className="text-xs text-accent-foreground">{tool.setup}</p>
-                  )}
-                  <Button variant="outline" size="sm" className="mt-3" asChild>
-                    <a href={tool.downloadUrl} target="_blank" rel="noopener noreferrer">
-                      <Download className="w-3 h-3 mr-1" />
-                      Download
-                    </a>
-                  </Button>
+                <div key={index} className="bg-card border border-border/50 rounded-lg p-3 shadow-soft">
+                  <h4 className="font-bold text-foreground text-sm mb-1">{tool.name}</h4>
+                  <p className="text-xs text-muted-foreground">{tool.purpose}</p>
                 </div>
               ))}
             </div>
