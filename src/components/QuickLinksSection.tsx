@@ -89,11 +89,6 @@ const QuickLinksSection = () => {
       title: "Visual Studio Licenses",
       url: "https://my.visualstudio.com/",
       status: "After IT approval"
-    },
-    {
-      title: "CALUMO Slack",
-      url: "https://calumo.slack.com",
-      status: "Invitation required"
     }
   ];
 
