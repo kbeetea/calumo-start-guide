@@ -12,8 +12,7 @@ const AccessSection = () => {
         "Confluence: Calumo Engineering/DevOps space",
         "Jira: Calumo Engineering (CE) project", 
         "DWIGHT (via OKTA) access",
-        "Visual Studio Enterprise license",
-        "Slack workspace invitation (calumo.slack.com)"
+        "Visual Studio Enterprise license"
       ]
     },
     {
@@ -131,18 +130,6 @@ const AccessSection = () => {
       icon: <Shield className="w-6 h-6" />,
       description: "Request through IT Support",
       action: "itsupport@insightsoftware.com",
-      type: "IT Support"
-    },
-    {
-      step: 10,
-      title: "Slack Workspace",
-      icon: <Users className="w-6 h-6" />,
-      description: "Request invitation to CALUMO Slack workspace",
-      action: "IT Support request",
-      details: [
-        "Workspace: https://calumo.slack.com",
-        "Invitation reviewed and accepted by Paul Cavanagh-Downs"
-      ],
       type: "IT Support"
     }
   ];
